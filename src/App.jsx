@@ -1,10 +1,10 @@
 import React, { useReducer } from 'react';
 import Context from './Context';
 import Reducer from "./Reducer";
-import List from './List';
-import Details from './Details';
-import Comments from './Comments';
-import SubmitForm from './SubmitForm';
+import List from './components/List';
+import Details from './components/Details';
+import Comments from './components/Comments';
+import SubmitForm from './components/SubmitForm';
 import initialState from './InitialState.json';
 import './App.css';
 

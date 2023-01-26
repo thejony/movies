@@ -13,7 +13,7 @@ function Reducer (state = {}, action) {
                 if (Object.hasOwnProperty.call(listCopy, key)) {
                     const element = listCopy[key];
                     if (element.id === action.id) {
-                        if (action.type === 'GET_DETAILS')
+                        if (action.type === 'GET_DETAILS') 
                             element["details"] = action.data;
                         else if (action.type === 'GET_COMMENTS')
                             element["comments"] = action.data;

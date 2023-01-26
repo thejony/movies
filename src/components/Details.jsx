@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
-import { useCustomContext } from "./Context";
-import fetchData from "./http/fetchData";
+import { useCustomContext } from "../Context";
+import fetchData from "../http/fetchData";
 
 export default function Details() {
     const { moviesState, moviesDispatch } = useCustomContext();
@@ -22,12 +22,12 @@ export default function Details() {
 
     return (<div>
         <h3>{element["Film"]}</h3>
-        <div>Genre: {element.details && element.details["genre"]}</div>
-        <div>Studio: {element.details && element.details["studio"]}</div>
-        <div>User rating: {element.details && (element.details["audience_score"] + '%')}</div>
-        <div>Profitability: {element.details && (element.details["profitability"].toFixed(1) + '%')}</div>
-        <div>Rotten Tomatoes Rating: {element.details && (element.details["rotten_tomatoes"] + '%')}</div>
-        <div>Worldwide Gross: {element.details && element.details["worldwide_gross"]}</div>
-        <div>Year Release: {element.details && element.details["year"]}</div>
+        <div><b>Genre:</b> {element.details && element.details["genre"]}</div>
+        <div><b>Studio:</b> {element.details && element.details["studio"]}</div>
+        <div><b>User rating:</b> {element.details && (element.details["audience_score"] + '%')}</div>
+        <div><b>Profitability:</b> {element.details && (element.details["profitability"] + '%')}</div>
+        <div><b>Rotten Tomatoes Rating:</b> {element.details && (element.details["rotten_tomatoes"] + '%')}</div>
+        <div><b>Worldwide Gross:</b> {element.details && element.details["worldwide_gross"]}</div>
+        <div><b>Year Release:</b> {element.details && element.details["year"]}</div>
     </div>);
 };

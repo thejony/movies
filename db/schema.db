@@ -1,9 +1,0 @@
-CREATE DATABASE movies;
-
-USE movies;
-
-CREATE TABLE films (id INTEGER NOT NULL AUTO_INCREMENT, film VARCHAR(100), genre VARCHAR(20), studio VARCHAR(100), audience_score TINYINT, profitability DECIMAL(11, 9), rotten_tomatoes TINYINT, worldwide_gross VARCHAR(10), year YEAR, PRIMARY KEY (id));
-
-CREATE TABLE comments (id INTEGER NOT NULL AUTO_INCREMENT, user_name VARCHAR(50), comment VARCHAR(200), id_film INTEGER NULL, FOREIGN KEY (id_film) REFERENCES films(id) ON DELETE NO ACTION ON UPDATE CASCADE, PRIMARY KEY (id));
-
-LOAD DATA INFILE '/var/lib/mysql-files/movies.csv' INTO TABLE films FIELDS TERMINATED BY ',' LINES TERMINATED BY '\n' IGNORE 1 LINES (film, genre, studio, audience_score, profitability, rotten_tomatoes, worldwide_gross, year);

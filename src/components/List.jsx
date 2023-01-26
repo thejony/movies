@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
-import { useCustomContext } from "./Context";
-import fetchData from "./http/fetchData";
+import { useCustomContext } from "../Context";
+import fetchData from "../http/fetchData";
 
 export default function List() {
     const { moviesState, moviesDispatch } = useCustomContext();

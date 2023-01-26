@@ -1,6 +1,8 @@
+require("dotenv").config();
 const express = require('express');
+const path = require("path");
 const app = express();
-const port = process.env.PORT || process.env.VCAP_APP_PORT || 3001;
+const port = process.env.PORT || process.env.NODE_DOCKER_PORT || 8080;
 const db = require("./db.js");
 
 // parse requests of content-type - application/json
@@ -8,11 +10,6 @@ app.use(express.json());
 
 // parse requests of content-type - application/x-www-form-urlencoded
 app.use(express.urlencoded({ extended: true }));
-
-
-app.get('/', (req, res) => {
-    res.send('Hello World!');
-});
 
 app.get('/movies', (req, res) => {
     console.log('> movies');
@@ -32,10 +29,12 @@ app.get('/details/:id', (req, res) => {
     console.log('> details', req.params.id);
     try {
         const id = parseInt(req.params.id);
-        db.query(`SELECT genre, studio, audience_score, profitability, rotten_tomatoes, worldwide_gross, year FROM movies.films WHERE id='${id}'`, (err, result) => {
+        db.query(`SELECT film, genre, studio, audience_score, profitability, rotten_tomatoes, worldwide_gross, year FROM movies.films WHERE id='${id}'`, (err, result) => {
             if (err) throw err;
-            if (result && result.length > 0)
-                res.send({ data: result[0], error: "" });
+            if (result && result.length > 0) {
+                const data = { ...result[0], profitability: Number.parseFloat(result[0].profitability).toFixed(1) }
+                res.send({ data, error: "" });
+            }
             else
                 res.send({ data: [], error: "Film not found" });
         });
@@ -79,6 +78,17 @@ app.post('/comments/:id', (req, res) => {
         res.send({ data: [], error: "Internal server error" });
     }
 });
+
+if (process.env.NODE_ENV === 'production') {
+    app.use(express.static(path.join(__dirname, "../build")));
+    app.get('*', (req, res) => {
+        res.sendFile(path.join(__dirname, "../build/index.html"));
+    });
+} else {
+    app.get('/', (req, res) => {
+        res.send('Hello World!');
+    });
+}
 
 app.listen(port, () => {
     console.log(`app listening on port ${port}`);
