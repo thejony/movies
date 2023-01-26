@@ -3,9 +3,10 @@ import Context from './Context';
 import Reducer from "./Reducer";
 import List from './List';
 import Details from './Details';
+import Comments from './Comments';
+import SubmitForm from './SubmitForm';
 import initialState from './InitialState.json';
 import './App.css';
-import Comments from './Comments';
 
 function App() {
   const [moviesState, moviesDispatch] = useReducer(Reducer, initialState);
@@ -23,6 +24,7 @@ function App() {
           {moviesState.selected > 0 && <Details />}
           <hr />
           {moviesState.selected > 0 && <Comments />}
+          {moviesState.selected > 0 && <SubmitForm />}
         </div>
       </div>
     </Context.Provider>

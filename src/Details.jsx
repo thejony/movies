@@ -9,23 +9,25 @@ export default function Details() {
     const element = moviesState.list.filter(i => i.id === moviesState.selected)[0];
 
     useEffect(() => {
-        fetchData("/details/" + moviesState.selected).then(json => {
-            moviesDispatch({ type: 'GET_DETAILS', id: moviesState.selected, data: json.data });
-            setError(json.error);
-        });
-    }, [moviesState.selected, moviesDispatch]);
+        if (!element.details) {
+            fetchData("/details/" + moviesState.selected).then(json => {
+                moviesDispatch({ type: 'GET_DETAILS', id: moviesState.selected, data: json.data });
+                setError(json.error);
+            });
+        }
+    }, [moviesState.selected, element.details, moviesDispatch]);
 
     if (error)
         return (<div>{error}</div>);
 
     return (<div>
         <h3>{element["Film"]}</h3>
-        <div>Genre: {element.details && element.details["Genre"]}</div>
-        <div>Studio: {element.details && element.details["Lead Studio"]}</div>
-        <div>User rating: {element.details && (element.details["Audience score"] + '%')}</div>
-        <div>Profitability: {element.details && (element.details["Profitability"].toFixed(1) + '%')}</div>
-        <div>Rotten Tomatoes Rating: {element.details && (element.details["Rotten Tomatoes"] + '%')}</div>
-        <div>Worldwide Gross: {element.details && element.details["Worldwide Gross"]}</div>
-        <div>Year Release: {element.details && element.details["Year"]}</div>
+        <div>Genre: {element.details && element.details["genre"]}</div>
+        <div>Studio: {element.details && element.details["studio"]}</div>
+        <div>User rating: {element.details && (element.details["audience_score"] + '%')}</div>
+        <div>Profitability: {element.details && (element.details["profitability"].toFixed(1) + '%')}</div>
+        <div>Rotten Tomatoes Rating: {element.details && (element.details["rotten_tomatoes"] + '%')}</div>
+        <div>Worldwide Gross: {element.details && element.details["worldwide_gross"]}</div>
+        <div>Year Release: {element.details && element.details["year"]}</div>
     </div>);
 };

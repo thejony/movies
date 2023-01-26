@@ -16,3 +16,11 @@
   margin: 0;
   padding: 0;
 }
+
+form {
+  margin-top: 1rem;
+}
+
+form div {
+  margin: 0.4rem 0;
+}

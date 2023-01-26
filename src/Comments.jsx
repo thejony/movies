@@ -17,22 +17,14 @@ export default function Comments() {
             setLoading(false);
         });
     }, [moviesState.selected, moviesDispatch]);
-    
-    if (loading)
-        return (<div><h4>Comments</h4>Loading...</div>);
 
     if (error)
         return (<div>{error}</div>);
 
     return (<div>
-        <div><h4>Comments</h4></div>
-        { element.comments.length > 0 ? 
-            element.comments.map(item => <div key={item.id}><label>{item.userName}:</label> <label>{item.comment}</label></div>):
+        <h4>Comments</h4>
+        { loading ? "Loading..." : element.comments.length > 0 ? 
+            element.comments.map(item => <div key={item.id}><b>{item.user_name}:</b> {item.comment}</div>):
             <div>No comments yet</div>}
-        <div>
-            <div><input placeholder="Name" /></div>
-            <div><textarea placeholder="Comments" /></div>
-            <div><button>Save</button></div>
-        </div>
     </div>);
 };
