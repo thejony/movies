@@ -10,6 +10,8 @@
 
 This app makes a list of a defined list of movies and display on the left panel of the screen, when you click on an item the right panel shows the a detailed information of the film and loads the comments; in addition, you can enter your user name and a comment and when you click on Save button, it will be posted.
 
+<img src="public/screenshot.png">
+
 The following technologies were used for the project:
 - `MySQL` as the main database, with a 1:N relation between films table and comments table.
 - `NodeJS + Express` as the server service and the API framework respectably (more details below).
@@ -38,7 +40,7 @@ The following table shows overview of the Rest API used for this project:
 
 ## RUN
 
-In order to run the project please use the following command
+In order to run the project please use the following command:
 
 ```bash
 $ docker-compose --env-file .env.prod up
